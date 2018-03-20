@@ -10,4 +10,4 @@ require_once ('InstaPic.php');
 
 $insta = new InstaPic();
 
-echo $insta->getLargePhoto('mehrdadep');
+echo $insta->getLargePhoto('mehrdad');

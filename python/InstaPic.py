@@ -92,7 +92,10 @@ class InstaPic(object):
             if (html is not None):
                 tree = tree = etree.HTML(html)
                 small = tree.xpath('//meta[@property="og:image"]')[0].get('content')
-                large = small.replace('vp/','').replace('s150x150','s1080x1080')
+                if 's150x150' in small:
+                    large = small.replace('vp/','').replace('s150x150','s1080x1080')
+                else:
+                    print ("Large size not available")
         except IndexError:
             print('Username or account not found')
         except Exception as e:
@@ -114,7 +117,10 @@ class InstaPic(object):
             if (html is not None):
                 tree = tree = etree.HTML(html)
                 small = tree.xpath('//meta[@property="og:image"]')[0].get('content')
-                large = small.replace('vp/','').replace('s150x150','s1080x1080')
+                if 's150x150' in small:
+                    large = small.replace('vp/','').replace('s150x150','s1080x1080')
+                else:
+                    print ("Large size not available")
         except IndexError:
             print('Username or account not found')
         except Exception as e:

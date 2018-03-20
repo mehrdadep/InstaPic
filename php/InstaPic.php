@@ -50,7 +50,7 @@ class InstaPic
                 $timeout = 1500;
                 curl_setopt($c, CURLOPT_URL, $url);
                 curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($c, CURLOPT_USERAGENT,$useragent);
+                curl_setopt($c, CURLOPT_USERAGENT, $useragent);
                 curl_setopt($c, CURLOPT_AUTOREFERER, true);
                 curl_setopt($c, CURLOPT_FOLLOWLOCATION, 1);
                 curl_setopt($c, CURLOPT_VERBOSE, 1);
@@ -131,8 +131,13 @@ class InstaPic
             if (!is_null($html)) {
                 $xpath = new DOMXpath($html);
                 $small = $xpath->query('//meta[@property="og:image"]//@content')[0]->nodeValue;
-                $large = str_replace('vp/', '', $small);
-                $large = str_replace('s150x150', 's1080x1080', $large);            }
+                if (strpos($small, 's150x150') !== false) {
+                    $large = str_replace('vp/', '', $small);
+                    $large = str_replace('s150x150', 's1080x1080', $large);
+                }
+                else
+                    echo 'Large size not available';
+            }
         } catch (OutOfBoundsException $ex) {
             echo 'Username or account not found';
             return null;
@@ -157,8 +162,12 @@ class InstaPic
             if (!is_null($html)) {
                 $xpath = new DOMXpath($html);
                 $small = $xpath->query('//meta[@property="og:image"]//@content')[0]->nodeValue;
-                $large = str_replace('vp/', '', $small);
-                $large = str_replace('s150x150', 's1080x1080', $large);
+                if (strpos($small, 's150x150') !== false) {
+                    $large = str_replace('vp/', '', $small);
+                    $large = str_replace('s150x150', 's1080x1080', $large);
+                }
+                else
+                    echo 'Large size not available';
             }
         } catch (OutOfBoundsException $ex) {
             echo 'Username or account not found';
