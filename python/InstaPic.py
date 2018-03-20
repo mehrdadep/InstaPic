@@ -1,3 +1,5 @@
+# Author: MehrdadEP
+
 from lxml import etree
 import requests
 
